@@ -16,6 +16,9 @@
 #define MAX_WORKERTHREAD 4
 #define MAX_SOCKBUF 256
 
+#define DBSERVERIP "127.0.0.1"
+#define DBSERVERPORT 8000
+
 enum class IOOperation
 {
 	RECV,
@@ -50,6 +53,12 @@ struct ClientInfo
 class Server
 {
 private:
+	//데이터베이스 서버 연결 소켓
+	SOCKET DBSock;
+	int retval;
+	char mDBSocketBuf[1024] = { 0 };
+	//클라이언트 연결
+
 	SOCKET listenSocket = INVALID_SOCKET;
 
 	std::vector<std::unique_ptr<Packet>> packet;
@@ -75,6 +84,8 @@ public:
 	~Server() { WSACleanup(); }
 
 	bool InitSocket();
+
+	bool InitDBSocket();
 
 	bool BindSocket();
 

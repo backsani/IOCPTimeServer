@@ -4,6 +4,7 @@ Server::Server()
 {
 	this->packet.push_back(std::make_unique<PK_MESSAGE>());
 	this->packet.push_back(std::make_unique<PK_TIME>());
+	this->packet.push_back(std::make_unique<PK_DB_LOGIN>());
 }
 
 bool Server::InitSocket()
@@ -27,6 +28,37 @@ bool Server::InitSocket()
 	printf("소켓 초기화 성공\n");
 	return true;
 }
+
+bool Server::InitDBSocket()
+{
+	WSADATA wsaData;
+
+	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
+		return 1;
+
+	// socket()
+	DBSock = socket(AF_INET, SOCK_STREAM, 0);
+	if (DBSock == INVALID_SOCKET)
+	{
+		printf("[DB에러] socket() 함수 실패 : %d\n", GetLastError());
+		return false;
+	}
+
+	// connect()
+	SOCKADDR_IN serveraddr;
+	ZeroMemory(&serveraddr, sizeof(serveraddr));
+	serveraddr.sin_family = AF_INET;
+	serveraddr.sin_addr.s_addr = inet_addr(DBSERVERIP);
+	serveraddr.sin_port = htons(DBSERVERPORT);
+	int retval = connect(DBSock, (SOCKADDR*)&serveraddr, sizeof(serveraddr));
+	if (retval == SOCKET_ERROR)
+	{
+		printf("[DB에러] connect() 함수 실패 : %d\n", GetLastError());
+		return false;
+	}
+}
+
+
 
 bool Server::BindSocket()
 {
@@ -200,6 +232,24 @@ void Server::WokerThread()
 				pClientInfo->mRecvBuf[currentTime.size()] = '\0';
 
 				bufSize =  currentTime.size();
+			}
+			else if (currentHeader == LOGIN)
+			{
+				packet[currentHeader]->Serialaze(packet[currentHeader]->GetId(), sizeof(packet[currentHeader]->GetId()), packet[currentHeader]->GetPassword());
+				//getId, getPass로 구해서 데이터베이스 서버에 쏘기
+				retval = send(DBSock, mDBSocketBuf, BUFSIZE, 0);
+				if (retval == SOCKET_ERROR) 
+				{
+					printf("[DB에러] send() 함수 실패 : %d\n", GetLastError());
+					return ;
+				}
+
+				retval = recv(DBSock, mDBSocketBuf, BUFSIZE, 0);
+				if (retval == SOCKET_ERROR) 
+				{
+					printf("[DB에러] recv() 함수 실패 : %d\n", GetLastError());
+					return ;
+				}
 			}
 			else
 			{

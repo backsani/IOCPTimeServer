@@ -1,6 +1,11 @@
-﻿  main.cpp
-  Server.cpp
-C:\Users\hj577\source\repos\ServerHWIocpTime\ServerHWIocpTime\Server.cpp(202,32): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\hj577\source\repos\ServerHWIocpTime\ServerHWIocpTime\Server.cpp(384,6): warning C4101: 'retval' :참조되지 않은 지역 변수입니다.
+﻿  Server.cpp
+  main.cpp
+C:\Users\hj577\source\repos\ServerHWIocpTime\ServerHWIocpTime\Server.cpp(51,31): error C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+C:\Users\hj577\source\repos\ServerHWIocpTime\ServerHWIocpTime\Server.cpp(234,32): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hj577\source\repos\ServerHWIocpTime\ServerHWIocpTime\Server.cpp(238,28): error C2660: 'Packet::Serialaze': 함수는 3개의 인수를 사용하지 않습니다.
+      C:\Users\hj577\source\repos\ServerHWIocpTime\Packet\Packet.h(26,14):
+      'Packet::Serialaze' 선언을 참조하십시오.
+      C:\Users\hj577\source\repos\ServerHWIocpTime\ServerHWIocpTime\Server.cpp(238,28):
+      인수 목록 '(char *, size_t, char *)'을(를) 일치시키는 동안
+  
   코드를 생성하고 있습니다...
-  ServerHWIocpTime.vcxproj -> C:\Users\hj577\source\repos\ServerHWIocpTime\x64\Debug\ServerHWIocpTime.exe

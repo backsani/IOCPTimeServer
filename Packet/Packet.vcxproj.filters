@@ -27,6 +27,9 @@
     <ClInclude Include="PK_TIME.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="PK_DB_LOGIN.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Packet.cpp">
@@ -42,6 +45,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="PK_TIME.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PK_DB_LOGIN.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

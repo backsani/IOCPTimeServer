@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="Buffer_Converter.h" />
     <ClInclude Include="Packet.h" />
+    <ClInclude Include="PK_DB_LOGIN.h" />
     <ClInclude Include="PK_MESSAGE.h" />
     <ClInclude Include="PK_TIME.h" />
   </ItemGroup>
@@ -136,6 +137,7 @@
     <ClCompile Include="Buffer_Converter.cpp" />
     <ClCompile Include="Packet.cpp" />
     <ClCompile Include="PacketSDK.h" />
+    <ClCompile Include="PK_DB_LOGIN.cpp" />
     <ClCompile Include="PK_MESSAGE.cpp" />
     <ClCompile Include="PK_TIME.cpp" />
   </ItemGroup>
